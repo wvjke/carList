@@ -1,0 +1,10 @@
+.modal_delete {
+    text-align: center;
+
+    &_btn {
+        margin-top: 20px;
+        display: flex;
+        gap: 50px;
+        justify-content: center;
+    }
+}
