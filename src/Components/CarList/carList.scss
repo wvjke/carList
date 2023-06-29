@@ -60,3 +60,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
 }
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}

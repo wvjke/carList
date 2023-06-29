@@ -14,7 +14,6 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose, itemId }) => {
 
     const handleDelete = async () => {
         try {
-            console.log(itemId);
             await axios.delete(
                 `https://cars-791d0-default-rtdb.europe-west1.firebasedatabase.app/cars/${itemId}.json`
             );
