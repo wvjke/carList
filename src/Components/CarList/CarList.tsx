@@ -5,7 +5,7 @@ import { ICarState } from "../../redux/slices/cars";
 import { ICar, ModalType } from "./types";
 import { useState, useEffect } from "react";
 import AddEditModal from "../Modals/AddEditModal/AddEditModal";
-import { Button, Container } from "@mui/material";
+import { Button } from "@mui/material";
 import DeleteModal from "../Modals/DeleteModal/DeleteModal";
 import { fetchCars, filterCars } from "../../redux/slices/cars";
 import { useDispatch, useSelector } from "react-redux";
