@@ -44,7 +44,7 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
 
     const handleSubmit = async (car: ICar) => {
         car.price = `$${Number(car.price).toFixed(2)}`;
-        car.vin.toUpperCase();
+        car.vin = car.vin.toUpperCase();
         if (type === ModalType.Add) {
             try {
                 await axios.post(
