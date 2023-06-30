@@ -14,7 +14,13 @@ export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
     const { data } = await axios.get(
         "https://cars-791d0-default-rtdb.europe-west1.firebasedatabase.app/cars.json"
     );
-    return data.filter((item: ICar) => item);
+
+    const dataArray = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+    }));
+
+    return dataArray.reverse();
 });
 
 const initialState: ICarState = {
@@ -36,7 +42,7 @@ const carsSlice = createSlice({
                     .includes(action.payload.toLowerCase())
             );
         },
-        deleteCar: (state, action: PayloadAction<number>) => {
+        deleteCar: (state, action: PayloadAction<string>) => {
             state.cars.items = state.cars.items.filter(
                 (item) => item.id !== action.payload
             );

@@ -39,7 +39,15 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose, itemId }) => {
             />
             <Modal open={open} onClose={onClose}>
                 <Fade in={open}>
-                    <div className="modal modal_delete">
+                    <div
+                        className="modal modal_delete"
+                        style={{
+                            backgroundColor:
+                                localStorage.getItem("theme") === "light"
+                                    ? "white"
+                                    : "black",
+                        }}
+                    >
                         <h3>Are you sure you want to delete this item?</h3>
                         <div className="modal_delete_btn">
                             <Button

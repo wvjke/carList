@@ -1,11 +1,11 @@
 export interface ICar {
-    id: number;
+    id?: string;
     company: string;
     model: string;
     vin: string;
     color: string;
     year: number;
-    price: number;
+    price: string;
     availability: boolean;
 }
 

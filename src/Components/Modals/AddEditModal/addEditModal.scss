@@ -1,0 +1,26 @@
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &_price {
+        display: flex;
+        gap: 30px;
+    }
+    &_availability {
+        display: flex;
+        flex-direction: column;
+        span {
+            align-self: center;
+            width: fit-content;
+        }
+    }
+    button {
+        padding: 10px;
+    }
+}
+#price::-webkit-outer-spin-button,
+#price::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

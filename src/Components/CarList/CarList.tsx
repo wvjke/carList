@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import "./carList.scss";
 import { ICarState } from "../../redux/slices/cars";
@@ -14,7 +15,6 @@ import Fade from "@mui/material/Fade";
 
 const Carlist: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
-
     const cars: ICar[] = useSelector(
         (state: { cars: ICarState }) => state.cars.cars.items
     );
@@ -26,7 +26,7 @@ const Carlist: React.FC = () => {
     );
 
     const [inputValue, setInputValue] = useState<string>("");
-    const [clickedItemId, setClickedItemId] = useState<number>(0);
+    const [clickedItemId, setClickedItemId] = useState<string>("");
     const [modalTypeOpen, setModalTypeOpen] = useState<ModalType>(
         ModalType.Add
     );
@@ -37,7 +37,10 @@ const Carlist: React.FC = () => {
 
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
     const handleDeleteModalOpen = () => setDeleteModalOpen(true);
-    const handleDeleteModalClose = () => setDeleteModalOpen(false);
+    const handleDeleteModalClose = () => {
+        dispatch(filterCars(inputValue));
+        setDeleteModalOpen(false);
+    };
 
     const columns: GridColDef[] = [
         { field: "company", headerName: "Company", width: 150 },
@@ -76,7 +79,11 @@ const Carlist: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchCars());
-    }, [dispatch]);
+    }, []);
+
+    useEffect(() => {
+        dispatch(filterCars(inputValue));
+    }, [cars]);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -89,7 +96,7 @@ const Carlist: React.FC = () => {
 
     const handleSelectChange = (
         e: React.ChangeEvent<HTMLSelectElement>,
-        carId: number
+        carId: string
     ) => {
         setClickedItemId(carId);
         if (e.target.value === "edit") {
@@ -105,55 +112,51 @@ const Carlist: React.FC = () => {
         <>
             {isLoaded ? (
                 <>
-                    <Container>
-                        <Fade in={isLoaded}>
-                            <section className="car_list">
-                                <h1 className="car_list_title">Car List</h1>
-                                <DataGrid
-                                    style={{
-                                        outline: "none",
-                                        padding: "20px",
-                                    }}
-                                    rows={inputValue ? filteredCars : cars}
-                                    columns={columns}
-                                    initialState={{
-                                        pagination: {
-                                            paginationModel: {
-                                                pageSize: 10,
-                                            },
+                    <Fade in={isLoaded}>
+                        <section className="car_list">
+                            <h1 className="car_list_title">Car List</h1>
+                            <DataGrid
+                                style={{
+                                    outline: "none",
+                                    padding: "20px",
+                                }}
+                                rows={inputValue ? filteredCars : cars}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: {
+                                            pageSize: 10,
                                         },
-                                    }}
-                                    disableRowSelectionOnClick
-                                    disableColumnMenu
-                                />
-                                <Button
-                                    sx={{
-                                        position: "absolute",
-                                        bottom: "2%",
-                                        left: "3%",
-                                    }}
-                                    variant="contained"
-                                    color="info"
-                                    onClick={() => {
-                                        setModalTypeOpen(ModalType.Add),
-                                            handleAddEditModalOpen();
-                                    }}
-                                >
-                                    Add
-                                </Button>
-                                <input
-                                    id="search"
-                                    type="text"
-                                    placeholder="Search..."
-                                    required
-                                    onChange={(e) =>
-                                        setInputValue(e.target.value)
-                                    }
-                                />
-                            </section>
-                        </Fade>
-                    </Container>
-
+                                    },
+                                }}
+                                disableRowSelectionOnClick
+                                disableColumnMenu
+                            />
+                            <Button
+                                sx={{
+                                    position: "absolute",
+                                    bottom: "2%",
+                                    left: "3%",
+                                }}
+                                variant="contained"
+                                color="info"
+                                onClick={() => {
+                                    setModalTypeOpen(ModalType.Add),
+                                        handleAddEditModalOpen();
+                                }}
+                            >
+                                Add
+                            </Button>
+                            <input
+                                id="search"
+                                type="text"
+                                placeholder="Search..."
+                                required
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                            />
+                        </section>
+                    </Fade>
                     <AddEditModal
                         open={addEditModalOpen}
                         onClose={handleAddEditModalClose}
