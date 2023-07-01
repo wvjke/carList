@@ -16,6 +16,7 @@ const ThemeToggler = () => {
 
     return (
         <div className="toggler">
+            <div>{theme === "dark" ? "dark" : "light"} mode</div>
             <IconButton
                 sx={{ ml: 1 }}
                 color="inherit"
