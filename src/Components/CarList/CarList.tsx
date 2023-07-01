@@ -116,7 +116,7 @@ const Carlist: React.FC = () => {
                         <section className="car_list">
                             <h1 className="car_list_title">Car List</h1>
                             <DataGrid
-                                style={{
+                                sx={{
                                     outline: "none",
                                     padding: "20px",
                                 }}
@@ -135,8 +135,8 @@ const Carlist: React.FC = () => {
                             <Button
                                 sx={{
                                     position: "absolute",
-                                    bottom: "2%",
-                                    left: "3%",
+                                    bottom: "20px",
+                                    left: "27px",
                                 }}
                                 variant="contained"
                                 color="info"
