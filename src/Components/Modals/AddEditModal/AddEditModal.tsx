@@ -185,6 +185,10 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
                                             as={Checkbox}
                                             label="Availability"
                                             name="availability"
+                                            checked={
+                                                initialValues.availability ===
+                                                true
+                                            }
                                         />
                                     </div>
                                 </div>
