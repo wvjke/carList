@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { fetchCars } from "../../../redux/slices/cars";
 import { AppDispatch } from "../../../redux/store";
 import { Button, TextField, Checkbox, InputAdornment } from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddEditModal: React.FC<AddEditModalProps> = ({
     open,
@@ -91,7 +92,7 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
                 closeOnClick
                 rtl={false}
                 pauseOnHover={false}
-                theme="light"
+                theme="dark"
             />
             <Modal open={open} onClose={onClose}>
                 <Fade in={open}>
@@ -183,12 +184,9 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
                                         <div>Availability</div>
                                         <Field
                                             as={Checkbox}
+                                            type="checkbox"
                                             label="Availability"
                                             name="availability"
-                                            checked={
-                                                initialValues.availability ===
-                                                true
-                                            }
                                         />
                                     </div>
                                 </div>
