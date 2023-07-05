@@ -30,6 +30,10 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
     let initialValues: ICar | undefined = cars.find((car) => car.id === itemId);
 
     if (type === ModalType.Edit && initialValues) {
+        initialValues = {
+            ...initialValues,
+            price: initialValues.price.slice(1),
+        };
         isDisabled = true;
     } else {
         initialValues = {
@@ -81,7 +85,6 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
             }
         }
     };
-
     return (
         <div>
             <ToastContainer
@@ -92,7 +95,7 @@ const AddEditModal: React.FC<AddEditModalProps> = ({
                 closeOnClick
                 rtl={false}
                 pauseOnHover={false}
-                theme="dark"
+                theme="light"
             />
             <Modal open={open} onClose={onClose}>
                 <Fade in={open}>
